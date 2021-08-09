@@ -5,7 +5,7 @@ import Foundation
  * [The payment request object](https://falu.io)
  *
  */
-struct PaymentRequest: Codable {
+public struct PaymentRequest: Codable {
     /**
      * Amount of the payment in smallest currency unit.
      */

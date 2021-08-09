@@ -3,7 +3,7 @@ import Foundation
 /**
  * Represents the provider details for a MPESA payment
  */
-struct MpesaPaymentRequest {
+public struct MpesaPaymentRequest {
     /**
      * Phone number representing the account to be charged, in E.164 format.
      */
