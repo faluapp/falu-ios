@@ -1,6 +1,6 @@
 import Foundation
 
-enum PaymentStatus: Codable, String {
+enum PaymentStatus: String, Codable {
     case pending
     case succeeded
     case failed

@@ -20,7 +20,7 @@ class PaymentFailure: Codable{
     var detail: String? = nil
 }
 
-enum FailureReason : Codable, String {
+enum FailureReason : String, Codable {
     case unknown
     case insufficient_balance
     case authentication_error

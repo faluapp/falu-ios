@@ -1,7 +1,7 @@
 import Foundation
 
 
-enum PaymentType: Codable, String {
+enum PaymentType: String, Codable {
     case mpesa
     case airtelmoney
     case mtnmoney
