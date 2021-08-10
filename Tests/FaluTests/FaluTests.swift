@@ -26,4 +26,26 @@
             waitForExpectations(timeout: 5, handler: nil)
             XCTAssertNotNil(faluError)
         }
+        
+        func testMpesaPaymentRequestSucceeds(){
+            let mpesa = MpesaPaymentRequest(
+                phone: "+254722000000",
+                reference: "254722000000",
+                paybill: true
+            )
+            
+            let request = PaymentRequest(amount: 100, currency: "kes", mpesa: mpesa)
+            var payment: Payment? = nil
+            let expectation = self.expectation(description: "Payments")
+            
+            falu.createPayment(request: request) { result in
+                if case .success(let resource) = result{
+                    payment = resource
+                    expectation.fulfill()
+                }
+            }
+            
+            waitForExpectations(timeout: 5, handler: nil)
+            XCTAssertNotNil(payment)
+        }
     }
