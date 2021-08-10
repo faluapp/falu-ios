@@ -37,6 +37,44 @@ internal class FaluApiClient: TingleApiClient{
         
         return sendRequest(request: &request, completionHandler: completionHandler)
     }
+    
+    @discardableResult
+    func createEvaluation(evaluationRequest: EvaluationRequest,_ completionHandler: @escaping (AnyResourceResponse<Evaluation>?, Error?) -> Void) -> URLSessionTask{
+        let url = URL(string: "\(baseUrl)/v1/evaluations")!
+        
+        let boundary:String = "\(UUID().uuidString)"
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+       
+        var requestBody = Data()
+        
+        let startingBoundary = "\r\n--\(boundary)\r\nContent-Type: application/pdf\r\nContent-Disposition: form-data; filename=\(evaluationRequest.fileName); name=file\r\n\r\n"
+        
+        
+        if let d = startingBoundary.data(using: .utf8) {
+            requestBody.append(d)
+        }
+        
+        requestBody.append(evaluationRequest.file)
+        
+        
+        let closingBoundary = "\r\n--\(boundary)--"
+        
+        if let d = closingBoundary.data(using: .utf8) {
+            requestBody.append(d)
+        }
+
+        let params = "Currency=\(evaluationRequest.currency)&Scope=\(evaluationRequest.scope)&Provider=\(evaluationRequest.provider)&Name=\(evaluationRequest.name)&Phone=\(evaluationRequest.phone ?? "")&Password=\(evaluationRequest.password ?? "")"
+                  .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        if let params = params.data(using: .utf8) {
+            requestBody.append(params)
+        }
+
+        request.httpBody = requestBody
+        return sendRequest(request: &request, completionHandler: completionHandler)
+    }
 }
 
 internal class FaluAuthHeaderProvider: AuthenticationHeaderProvider{

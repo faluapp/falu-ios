@@ -1,6 +1,6 @@
     import XCTest
     @testable import Falu
-
+    
     final class FaluTests: XCTestCase {
         private let falu = Falu("pk_test_cbw2Bxslzkxf7sUAg6932NYm1ApTX7C0TEMbvCYss")
         
