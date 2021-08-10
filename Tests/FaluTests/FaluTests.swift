@@ -48,4 +48,31 @@
             waitForExpectations(timeout: 5, handler: nil)
             XCTAssertNotNil(payment)
         }
+        
+        func testEvaluationCreationFails(){
+          
+            let request = EvaluationRequest(
+                currency: "kes",
+                scope: .personal,
+                provider: .mpesa,
+                name: "JOHN DOE",
+                phone: "+254712345678",
+                password: "pass",
+                file: Data(),
+                fileName: "statement"
+            )
+            
+            var faluError: FaluError? = nil
+            let expectation = self.expectation(description: "Evaluations")
+            
+            falu.createEvaluation(request: request) { result in
+                if case .failure(let error) = result{
+                    faluError = error
+                    expectation.fulfill()
+                }
+            }
+            
+            waitForExpectations(timeout: 5, handler: nil)
+            XCTAssertNotNil(faluError)
+        }
     }
