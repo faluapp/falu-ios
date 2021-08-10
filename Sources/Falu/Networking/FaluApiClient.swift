@@ -23,6 +23,7 @@ internal class FaluApiClient: TingleApiClient{
                                  Bundle.main.bundleVersion ?? "",
                                  _appKind: "iOS"),
             LoggingMiddleware(.BODY, .info),
+            ApiVersionMiddleware()
         ]
     }
     
