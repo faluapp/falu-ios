@@ -24,5 +24,5 @@ public struct MpesaPaymentRequest: Codable {
      * When not provided, either the default incoming business code or the first business code for the workspace is used depending on the kind.
      * This value is usually required and different from the business short code when using BuyGood
      */
-    var destination: String?
+    var destination: String? = nil
 }
