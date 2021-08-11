@@ -34,7 +34,7 @@
                 paybill: true
             )
             
-            let request = PaymentRequest(amount: 100, currency: "kes", mpesa: mpesa)
+            let request = PaymentRequest(amount: 200.70, currency: "kes", mpesa: mpesa)
             var payment: Payment? = nil
             let expectation = self.expectation(description: "Payments")
             
@@ -74,5 +74,14 @@
             
             waitForExpectations(timeout: 5, handler: nil)
             XCTAssertNotNil(faluError)
+        }
+        
+        func testMoneyPatternConversion(){
+            let money = Money(
+                amount: 1000,
+                currencyCode: "bhd"
+            )
+            XCTAssertEqual("BHD", money.currency.code)
+            XCTAssertEqual(1000000, money.amountInMinorUnits)
         }
     }
