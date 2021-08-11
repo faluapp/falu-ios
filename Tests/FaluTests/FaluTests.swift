@@ -34,7 +34,7 @@
                 paybill: true
             )
             
-            let request = PaymentRequest(amount: 100, currency: "kes", mpesa: mpesa)
+            let request = PaymentRequest(amount: 200.70, currency: "kes", mpesa: mpesa)
             var payment: Payment? = nil
             let expectation = self.expectation(description: "Payments")
             
