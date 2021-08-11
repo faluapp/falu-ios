@@ -75,4 +75,13 @@
             waitForExpectations(timeout: 5, handler: nil)
             XCTAssertNotNil(faluError)
         }
+        
+        func testMoneyPatternConversion(){
+            let money = Money(
+                amount: 1000,
+                currencyCode: "bhd"
+            )
+            XCTAssertEqual("BHD", money.currency.code)
+            XCTAssertEqual(1000000, money.amountInMinorUnits)
+        }
     }
