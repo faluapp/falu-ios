@@ -23,7 +23,7 @@ public struct PaymentRequest: Codable {
      */
     var mpesa: MpesaPaymentRequest?
     
-    init(amount: Decimal, currency: String, mpesa: MpesaPaymentRequest?) {
+    public init(amount: Decimal, currency: String, mpesa: MpesaPaymentRequest?) {
         self.currency = currency.lowercased()
         self.amount = Money(amount: amount, currencyCode: self.currency).amountInMinorUnits
         self.mpesa = mpesa
