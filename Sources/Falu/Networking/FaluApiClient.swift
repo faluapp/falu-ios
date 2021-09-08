@@ -44,37 +44,21 @@ internal class FaluApiClient: TingleApiClient{
     func createEvaluation(evaluationRequest: EvaluationRequest,_ completionHandler: @escaping (AnyResourceResponse<Evaluation>?, Error?) -> Void) -> URLSessionTask{
         let url = URL(string: "\(baseUrl)/v1/evaluations")!
         
-        let boundary:String = "\(UUID().uuidString)"
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        let body = try! MultipartBody.Builder(&request, type: .FORM)
+            .addFormDataPart(name: "file", fileName: evaluationRequest.fileName, withData: evaluationRequest.file)
+            .addFormDataPart(name: "currency", value: evaluationRequest.currency)
+            .addFormDataPart(name: "scope", value: evaluationRequest.scope.rawValue)
+            .addFormDataPart(name: "provider", value: evaluationRequest.provider.rawValue)
+            .addFormDataPart(name: "name",  value: evaluationRequest.name)
+            .addFormDataPart(name: "phone", value: evaluationRequest.phone ?? "")
+            .addFormDataPart(name: "password", value: evaluationRequest.password ?? "")
+            .build()
+        
+        request.httpBody = body.toRequestBody()
        
-        var requestBody = Data()
-        
-        let startingBoundary = "\r\n--\(boundary)\r\nContent-Type: application/pdf\r\nContent-Disposition: form-data; filename=\(evaluationRequest.fileName); name=file\r\n\r\n"
-        
-        
-        if let d = startingBoundary.data(using: .utf8) {
-            requestBody.append(d)
-        }
-        
-        requestBody.append(evaluationRequest.file)
-        
-        
-        let closingBoundary = "\r\n--\(boundary)--"
-        
-        if let d = closingBoundary.data(using: .utf8) {
-            requestBody.append(d)
-        }
-
-        let params = "Currency=\(evaluationRequest.currency)&Scope=\(evaluationRequest.scope)&Provider=\(evaluationRequest.provider)&Name=\(evaluationRequest.name)&Phone=\(evaluationRequest.phone ?? "")&Password=\(evaluationRequest.password ?? "")"
-                  .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        
-        if let params = params.data(using: .utf8) {
-            requestBody.append(params)
-        }
-
-        request.httpBody = requestBody
         return sendRequest(request: &request, completionHandler: completionHandler)
     }
 }

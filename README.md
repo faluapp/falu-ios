@@ -1,5 +1,7 @@
 # Falu
 
+[![Falu](https://github.com/tinglesoftware/falu-ios/actions/workflows/swift.yml/badge.svg)](https://github.com/tinglesoftware/falu-ios/actions/workflows/swift.yml)![Language](https://img.shields.io/badge/language-Swift%205.0-orange.svg)
+
 Falu's iOS SDK simplifies the process of building excellent financial services into iOS applications.
 The SDK exposes APIs that will enable you to make payments and evaluate your client's credit worth.
 
