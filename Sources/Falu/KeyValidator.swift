@@ -4,8 +4,8 @@ internal class KeyValidator{
     static func requireValid(_ key: String) throws -> String{
         if key.isEmpty{
             throw FaluError.InvalidKeyExpection("Invalid Publishable Key: " +
-                                                "You must use a valid FALU API key to make a FALU API request. " +
-                                                "For more info, see https://docs.falu.io/guides/keys")
+                                                    "You must use a valid FALU API key to make a FALU API request. " +
+                                                    "For more info, see https://docs.falu.io/guides/keys")
         }
         
         if key.starts(with: "sk_"){

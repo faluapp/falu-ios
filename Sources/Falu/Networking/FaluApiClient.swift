@@ -61,6 +61,24 @@ internal class FaluApiClient: TingleApiClient{
        
         return sendRequest(request: &request, completionHandler: completionHandler)
     }
+    
+    @discardableResult
+    func uploadFile(uploadRequest: UploadRequest,_ completionHandler: @escaping (AnyResourceResponse<FaluFile>?, Error?) -> Void) -> URLSessionTask{
+        let url = URL(string: "\(baseUrl)/v1/files")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let body = try! MultipartBody.Builder(&request, type: .FORM)
+            .addFormDataPart(name: "file", fileName: uploadRequest.fileName, withData: uploadRequest.file)
+            .addFormDataPart(name: "purpose", value: uploadRequest.purpose.purpose)
+            .addFormDataPart(name: "description", value: uploadRequest.description ?? "")
+            .build()
+        
+        request.httpBody = body.toRequestBody()
+       
+        return sendRequest(request: &request, completionHandler: completionHandler)
+    }
 }
 
 internal class FaluAuthHeaderProvider: AuthenticationHeaderProvider{
