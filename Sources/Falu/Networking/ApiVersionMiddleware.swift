@@ -6,7 +6,7 @@ import TingleApiClient
  */
 internal class ApiVersionMiddleware: TingleApiClientMiddleware{
     func process(request: inout URLRequest) -> URLRequest {
-        request.setValue("2020-09-08", forHTTPHeaderField: "X-Falu-Version")
+        request.setValue("2021-09-03", forHTTPHeaderField: "X-Falu-Version")
         return request
     }
     
