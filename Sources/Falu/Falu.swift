@@ -30,27 +30,9 @@ public class Falu {
      * - Parameter  completion to receive the result or error
      *
      */
-    public func createPayment(request: PaymentRequest, _ completion: @escaping  (Result<Payment, FaluError>) -> Void){
+    public func createPayment(request: PaymentRequest, _ completion: @escaping  (Result<Payment, Error>) -> Void){
         apiClient.createPayment(paymentRequest: request) { (response, error) in
-            
-            if (error != nil) {
-                // show a network error here
-                completion(.failure(error as! FaluError))
-                return
-            }
-            
-            guard let response = response else {
-                completion(.failure(.Unknown))
-                return
-            }
-            
-            if response.successful && response.resource != nil {
-                completion(.success(response.resource!))
-                return
-            }
-            
-            let problem = response.problem
-            completion(.failure(.ApiException(statusCode:response.statusCode, errorCode: problem?.error_code)))
+            self.responseHandler(withResponse: response, error: error, completion)
         }
     }
     
@@ -58,33 +40,56 @@ public class Falu {
      * Create an evaluation
      *
      * See [Create a payment](https://api.falu.io/v1/evaluations).
-     * `POST /v1/payments`
+     * `POST /v1/evaluations`
      *
      * - Parameter  request [The evaluation request object](https://falu.io)
      * - Parameter  completion to receive the result or error
      *
      */
-    public func createEvaluation(request: EvaluationRequest,  _ completion: @escaping  (Result<Evaluation, FaluError>) -> Void){
+    @available(*, deprecated, message: "Use `createFile`, then request for evaluation after the file has been created.")
+    public func createEvaluation(request: EvaluationRequest,  _ completion: @escaping  (Result<Evaluation, Error>) -> Void){
         apiClient.createEvaluation(evaluationRequest: request){ (response, error) in
-            if (error != nil) {
-                // show a network error here
-                completion(.failure(error as! FaluError))
-                return
-            }
-            
-            guard let response = response else {
-                completion(.failure(.Unknown))
-                return
-            }
-            
-            if response.successful && response.resource != nil {
-                completion(.success(response.resource!))
-                return
-            }
-            
-            let problem = response.problem
-            completion(.failure(.ApiException(statusCode:response.statusCode, errorCode: problem?.error_code)))
+            self.responseHandler(withResponse: response, error: error, completion)
         }
         
+    }
+    
+    /**
+     * Create a Falu File
+     *
+     * See [Create a payment](https://api.falu.io/v1/files).
+     * `POST /v1/files`
+     *
+     * - Parameter  request [The file creation request object](https://falu.io)
+     * - Parameter  completion to receive the result or error
+     *
+     */
+    public func createFile(request: UploadRequest,  _ completion: @escaping  (Result<FaluFile, Error>) -> Void){
+        
+        apiClient.uploadFile(uploadRequest: request){ (response, error) in
+            self.responseHandler(withResponse: response, error: error, completion)
+        }
+        
+    }
+    
+    private func responseHandler<TResource: Codable>(withResponse response: AnyResourceResponse<TResource>?,error : Error?, _ completion: @escaping (Result<TResource, Error>) -> Void){
+        if error != nil {
+            completion(.failure(error!))
+            return
+        }
+        
+        guard let response = response else {
+            completion(.failure(FaluError.notFound))
+            return
+        }
+        
+        if response.successful && response.resource != nil {
+            completion(.success(response.resource!))
+            return
+        }
+        
+        // generate HTTP response errors
+        let problem = response.problem
+        completion(.failure(FaluError.apiError(statusCode: response.statusCode, message: problem?.description)))
     }
 }
