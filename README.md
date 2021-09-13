@@ -1,4 +1,8 @@
-# Falu
+<a href="https://www.falu.io">
+    <img src="https://cdn.falu.io/tools/logo.png" alt="Falu Logo" title="Falu" width="120" height="120" align="right">
+</a>
+
+# Falu iOS SDK
 
 [![Falu](https://github.com/tinglesoftware/falu-ios/actions/workflows/swift.yml/badge.svg)](https://github.com/tinglesoftware/falu-ios/actions/workflows/swift.yml)
 ![Language](https://img.shields.io/badge/language-Swift%205.0-orange.svg)
