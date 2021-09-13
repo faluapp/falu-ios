@@ -31,7 +31,7 @@ public struct EvaluationRequest: Codable {
     
     /// Unique identifier of the file containing the statement.
     var fileId: String
-g
+
     
     public init(currency: String, scope: EvaluationScope, provider: StatementProvider, name: String, phone: String? = nil, password: String? = nil, fileId: String){
         self.currency = currency.lowercased()
