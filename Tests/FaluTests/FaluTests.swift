@@ -13,7 +13,7 @@
             )
             
             let request = PaymentRequest(amount: 100, currency: "kes", mpesa: mpesa)
-            var faluError: FaluError? = nil
+            var faluError: Error? = nil
             let expectation = self.expectation(description: "Payments")
             
             falu.createPayment(request: request) { result in
@@ -50,7 +50,7 @@
         }
         
         func testEvaluationCreationFails(){
-          
+            
             let request = EvaluationRequest(
                 currency: "kes",
                 scope: .personal,
@@ -62,7 +62,7 @@
                 fileName: "statement"
             )
             
-            var faluError: FaluError? = nil
+            var faluError: Error? = nil
             let expectation = self.expectation(description: "Evaluations")
             
             falu.createEvaluation(request: request) { result in
@@ -83,5 +83,29 @@
             )
             XCTAssertEqual("BHD", money.currency.code)
             XCTAssertEqual(1000000, money.amountInMinorUnits)
+        }
+        
+        func testFileCreationFails(){
+            
+            let request = UploadRequest(
+                file: Data(),
+                fileName: "statement.pdf",
+                purpose: .customerEvaluation,
+                description: "Test description",
+                expires: Date()
+            )
+            
+            var faluError: Error? = nil
+            let expectation = self.expectation(description: "Files")
+            
+            falu.createFile(request: request) { result in
+                if case .failure(let error) = result{
+                    faluError = error
+                    expectation.fulfill()
+                }
+            }
+            
+            waitForExpectations(timeout: 5, handler: nil)
+            XCTAssertNotNil(faluError)
         }
     }
