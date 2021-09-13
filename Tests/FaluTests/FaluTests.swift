@@ -58,8 +58,7 @@
                 name: "JOHN DOE",
                 phone: "+254712345678",
                 password: "pass",
-                fileId: "file_602a8dd0a54847479a874de4",
-                fileName: "statement"
+                fileId: "file_602a8dd0a54847479a874de4"
             )
             
             var faluError: Error? = nil

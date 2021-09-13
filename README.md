@@ -60,8 +60,7 @@ let request = EvaluationRequest(
     name: "JOHN DOE",
     phone: "+254712345678",
     password: "pass",
-    file: Data(),
-    fileName: "statement"
+    fileId: "file_602a8dd0a54847479a874de5"
 )
 
 falu.createEvaluation(request: request) { result in
