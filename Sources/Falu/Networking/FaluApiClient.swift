@@ -17,11 +17,7 @@ internal class FaluApiClient: TingleApiClient{
     }
 
     public override func buildMiddleware() -> [TingleApiClientMiddleware] {
-        [
-            AppDetailsMiddleware(Bundle.main.bundleIdentifier ?? "",
-                                 Bundle.main.shortBundleVersion ?? "",
-                                 Bundle.main.bundleVersion ?? "",
-                                 _appKind: "iOS"),
+        [    
             LoggingMiddleware(.BODY, .info),
             ApiVersionMiddleware(),
             UserAgentMiddleware()
