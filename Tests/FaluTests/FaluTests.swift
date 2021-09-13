@@ -58,7 +58,7 @@
                 name: "JOHN DOE",
                 phone: "+254712345678",
                 password: "pass",
-                file: Data(),
+                fileId: "file_602a8dd0a54847479a874de4",
                 fileName: "statement"
             )
             

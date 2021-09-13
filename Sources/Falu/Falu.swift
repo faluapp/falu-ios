@@ -46,12 +46,10 @@ public class Falu {
      * - Parameter  completion to receive the result or error
      *
      */
-    @available(*, deprecated, message: "Use `createFile`, then request for evaluation after the file has been created.")
     public func createEvaluation(request: EvaluationRequest,  _ completion: @escaping  (Result<Evaluation, Error>) -> Void){
         apiClient.createEvaluation(evaluationRequest: request){ (response, error) in
             self.responseHandler(withResponse: response, error: error, completion)
         }
-        
     }
     
     /**

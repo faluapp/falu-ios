@@ -46,19 +46,8 @@ internal class FaluApiClient: TingleApiClient{
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        
-        let body = try! MultipartBody.Builder(&request, type: .FORM)
-            .addFormDataPart(name: "file", fileName: evaluationRequest.fileName, withData: evaluationRequest.file)
-            .addFormDataPart(name: "currency", value: evaluationRequest.currency)
-            .addFormDataPart(name: "scope", value: evaluationRequest.scope.rawValue)
-            .addFormDataPart(name: "provider", value: evaluationRequest.provider.rawValue)
-            .addFormDataPart(name: "name",  value: evaluationRequest.name)
-            .addFormDataPart(name: "phone", value: evaluationRequest.phone ?? "")
-            .addFormDataPart(name: "password", value: evaluationRequest.password ?? "")
-            .build()
-        
-        request.httpBody = body.toRequestBody()
-       
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try! encoder.encode(evaluationRequest)
         return sendRequest(request: &request, completionHandler: completionHandler)
     }
     
