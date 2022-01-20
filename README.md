@@ -8,16 +8,16 @@
 ![Language](https://img.shields.io/badge/language-Swift%205.0-orange.svg)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/tinglesoftware/falu-ios?label=spm)
 
-
 Falu's iOS SDK simplifies the process of building excellent financial services into iOS applications.
 The SDK exposes APIs that will enable you to make payments and evaluate your client's credit worth.
 
-# Installation 
+# Installation  
 
 ## Swift Package Manager
 
 Falu is available on SPM. Add the following to you package.
-``` 
+
+``` swift
 import PackageDescription
 
 let package = Package(
@@ -29,7 +29,7 @@ let package = Package(
 
 # Getting Started
 
-### Setup Guide
+## Setup Guide
 
 Follow our [Setup Guide](https://docs.falu.io/guides/developer/quickstart) to get started.
 
@@ -38,8 +38,8 @@ Follow our [Setup Guide](https://docs.falu.io/guides/developer/quickstart) to ge
 ```swift
 let falu =  Falu("PUBLIC_KEY")
 ```
-The [public key](https://docs.falu.io/guides/keys) is mandatory. Failing to provide it will result into an `Error` when interacting with Falu.
 
+The [public key](https://docs.falu.io/guides/keys) is mandatory. Failing to provide it will result into an `Error` when interacting with Falu.
 
 # Features
 
@@ -52,7 +52,6 @@ This will allow you to know your user's spending habits from their financial sta
 Vist [Credit scoring customers using the Evaluations API](https://docs.falu.io/guides/evaluations) for more information relating to this.
 
 ```swift
-
 let request = EvaluationRequest(
     currency: "kes",
     scope: .personal,
