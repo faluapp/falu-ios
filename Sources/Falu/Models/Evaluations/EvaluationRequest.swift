@@ -30,16 +30,16 @@ public struct EvaluationRequest: Codable {
     var password: String?
     
     /// Unique identifier of the file containing the statement.
-    var fileId: String
+    var file: String
 
     
-    public init(currency: String, scope: EvaluationScope, provider: StatementProvider, name: String, phone: String? = nil, password: String? = nil, fileId: String){
+    public init(currency: String, scope: EvaluationScope, provider: StatementProvider, name: String, phone: String? = nil, password: String? = nil, file: String){
         self.currency = currency.lowercased()
         self.scope = scope
         self.provider = provider
         self.name = name
         self.phone = phone
         self.password = password
-        self.fileId = fileId
+        self.file = file
     }
 }
