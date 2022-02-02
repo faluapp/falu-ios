@@ -68,7 +68,7 @@ public class Payment: Codable{
     /**
      * Unique identifier for the workspace that the object belongs to
      */
-    public var workspaceId: String? = nil
+    public var workspace: String? = nil
     
     /**
      * Indicates if this object belongs in the live environment

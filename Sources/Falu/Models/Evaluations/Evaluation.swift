@@ -44,7 +44,7 @@ public class Evaluation: Codable{
     /**
      * Unique identifier for the workspace that the evaluation belongs to.
      */
-    public var workspaceId: String = ""
+    public var workspace: String = ""
 
     /**
      * Represents the scoring result for an evaluation.
