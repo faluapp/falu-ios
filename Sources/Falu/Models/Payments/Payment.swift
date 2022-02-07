@@ -22,7 +22,7 @@ public class Payment: Codable{
     /**
      * The status of a payment
      */
-    public var status: PaymentStatus? = nil
+    public var status: String? = nil
     
     /**
      * Time at which the object was created.
@@ -48,7 +48,7 @@ public class Payment: Codable{
     /**
      * The medium used for the payment
      */
-    public var type: PaymentType? = nil
+    public var type: String? = nil
     
     /**
      * Represents the provider details for a MPESA payment

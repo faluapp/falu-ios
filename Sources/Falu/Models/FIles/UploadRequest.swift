@@ -11,7 +11,7 @@ public struct UploadRequest{
     
     
     /// Purpose of the file upload
-    let purpose: FilePurpose
+    let purpose: String
     
     
     /// The description of the upload
@@ -24,7 +24,7 @@ public struct UploadRequest{
     public init(
         file: Data,
         fileName: String,
-        purpose: FilePurpose,
+        purpose: String,
         description:String? = nil,
         expires: Date? = nil){
         self.file = file

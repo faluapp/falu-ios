@@ -56,7 +56,7 @@ internal class FaluApiClient: TingleApiClient{
         
         let body = try! MultipartBody.Builder(&request, type: .FORM)
             .addFormDataPart(name: "file", fileName: uploadRequest.fileName, withData: uploadRequest.file)
-            .addFormDataPart(name: "purpose", value: uploadRequest.purpose.purpose)
+            .addFormDataPart(name: "purpose", value: uploadRequest.purpose)
             .addFormDataPart(name: "description", value: uploadRequest.description ?? "")
             .build()
         

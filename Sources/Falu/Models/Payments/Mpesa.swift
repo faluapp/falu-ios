@@ -8,7 +8,7 @@ public class Mpesa: Codable{
     /**
      * Type of payment
      */
-    public var type: PaymentType? = nil
+    public var type: String? = nil
     
     /**
      * Reference the payment was made in.
@@ -35,4 +35,13 @@ public class Mpesa: Codable{
      * Only populated for completed transactions.
      */
     public var receipt: String? = nil
+    
+    public enum CodingKeys: String, CodingKey{
+        case type
+        case reference
+        case phone
+        case payer
+        case businessShortCode = "business_short_code"
+        case receipt
+    }
 }

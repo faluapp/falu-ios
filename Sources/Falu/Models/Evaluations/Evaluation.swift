@@ -19,7 +19,7 @@ public class Evaluation: Codable{
      * Represents the scope within which an evaluation is generated.
      * This can also be considered the purpose of the evaluation.
      */
-    public var scope: EvaluationScope? = nil
+    public var scope: String? = nil
 
     /**
      * Time at which the object was created.
@@ -34,7 +34,7 @@ public class Evaluation: Codable{
     /**
      * Represents the status of an evaluation
      */
-    public var status: EvaluationStatus? = nil
+    public var status: String? = nil
 
     /**
      * Indicates if this object belongs in the live environment

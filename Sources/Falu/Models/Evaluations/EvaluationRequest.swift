@@ -9,11 +9,11 @@ public struct EvaluationRequest: Codable {
     
     /// Represents the scope within which an evaluation is generated.
     /// This can also be considered the purpose of the evaluation.
-    var scope: EvaluationScope
+    var scope: String
     
     
     /// Represents the kind of provider used for a statement in an evaluation.
-    var provider: StatementProvider
+    var provider: String
     
     
     /// The full name of the person or business that owns the statement.
@@ -33,7 +33,7 @@ public struct EvaluationRequest: Codable {
     var file: String
 
     
-    public init(currency: String, scope: EvaluationScope, provider: StatementProvider, name: String, phone: String? = nil, password: String? = nil, file: String){
+    public init(currency: String, scope: String, provider: String, name: String, phone: String? = nil, password: String? = nil, file: String){
         self.currency = currency.lowercased()
         self.scope = scope
         self.provider = provider
