@@ -35,4 +35,13 @@ public class Mpesa: Codable{
      * Only populated for completed transactions.
      */
     public var receipt: String? = nil
+    
+    public enum CodingKeys: String, CodingKey{
+        case type
+        case reference
+        case phone
+        case payer
+        case businessShortCode = "business_short_code"
+        case receipt
+    }
 }
