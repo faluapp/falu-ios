@@ -8,7 +8,7 @@ public class Mpesa: Codable{
     /**
      * Type of payment
      */
-    public var type: PaymentType? = nil
+    public var type: String? = nil
     
     /**
      * Reference the payment was made in.

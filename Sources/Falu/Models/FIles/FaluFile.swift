@@ -19,7 +19,7 @@ public class FaluFile: Codable {
     
     
     /// Purpose for a file.
-    public var purpose: FilePurpose? = nil
+    public var purpose: String? = nil
     
     
     /// Type of file.

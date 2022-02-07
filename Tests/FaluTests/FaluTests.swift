@@ -53,8 +53,8 @@
             
             let request = EvaluationRequest(
                 currency: "kes",
-                scope: .personal,
-                provider: .mpesa,
+                scope: "personal",
+                provider: "mpesa",
                 name: "JOHN DOE",
                 phone: "+254712345678",
                 password: "pass",
@@ -89,7 +89,7 @@
             let request = UploadRequest(
                 file: Data(),
                 fileName: "statement.pdf",
-                purpose: .customerEvaluation,
+                purpose: "customer.evaluation",
                 description: "Test description",
                 expires: Date()
             )
