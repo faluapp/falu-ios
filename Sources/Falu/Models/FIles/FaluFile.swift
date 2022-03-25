@@ -7,7 +7,7 @@ public class FaluFile: Codable {
     
     
     /// Time at which the file was created.
-    public var create: Date? = nil
+    public var created: Date? = nil
     
     
     /// Time at which the object was last updated
@@ -36,4 +36,16 @@ public class FaluFile: Codable {
     
     /// Time at which the file expires.
     public var expires: Date? = nil
+    
+    internal init(id: String, created: Date = Date(), updated: Date?, description: String, purpose: String, type: String?, fileName: String, size: Int64 = 0, expires: Date?){
+        self.id = id
+        self.created = created
+        self.updated = updated
+        self.description = description
+        self.purpose = purpose
+        self.type = type
+        self.fileName = fileName
+        self.size = size
+        self.expires = expires
+    }
 }

@@ -21,28 +21,6 @@ final class FaluTests: XCTestCase {
         encoder.dateEncodingStrategy = .iso8601
     }
     
-    func testMpesaPaymentRequestFails(){
-        let mpesa = MpesaPaymentRequest(
-            phone: "+254722000000",
-            reference: "254722000000",
-            paybill: true,
-            destination: "00110"
-        )
-        
-        let request = PaymentRequest(amount: 100, currency: "kes", mpesa: mpesa)
-        var faluError: Error? = nil
-        
-        falu.createPayment(request: request) { result in
-            if case .failure(let error) = result{
-                faluError = error
-                expectation.fulfill()
-            }
-        }
-        
-        waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertNotNil(faluError)
-    }
-    
     func testMpesaPaymentRequestSucceeds(){
         let expectation = self.expectation(description: "Payments")
         let url = URL(string: "\(baseUrl)/v1/payments")!
@@ -113,7 +91,13 @@ final class FaluTests: XCTestCase {
         XCTAssertEqual(1000000, money.amountInMinorUnits)
     }
     
-    func testFileCreationFails(){
+    func testFileUploadWorks(){
+        let expectation = self.expectation(description: "Files")
+        let url = URL(string: "\(baseUrl)/v1/files")!
+
+        let mockedFile = FaluFile(id: "fl_123", created: Date(), updated: Date(), description: "", purpose: "customer.evaluation", type: "pdf", fileName: "statement.pdf", size: 10, expires: Date())
+        let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [.post: try! encoder.encode(mockedFile)])
+        mock.register()
         
         let request = UploadRequest(
             file: Data(),
@@ -123,17 +107,16 @@ final class FaluTests: XCTestCase {
             expires: Date()
         )
         
-        var faluError: Error? = nil
-        let expectation = self.expectation(description: "Files")
+        var file: FaluFile? = nil
         
         falu.createFile(request: request) { result in
-            if case .failure(let error) = result{
-                faluError = error
+            if case .success(let model) = result{
+                file = model
                 expectation.fulfill()
             }
         }
         
         waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertNotNil(faluError)
+        XCTAssertNotNil(file)
     }
 }
