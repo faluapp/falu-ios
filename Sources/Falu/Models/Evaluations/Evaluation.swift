@@ -55,4 +55,17 @@ public class Evaluation: Codable{
      * Represents details about the statement used for an evaluation.
      */
     public var statement: EvaluationStatement? = nil
+    
+    internal init(id: String, currency: String, scope: String?, created: Date = Date(), updated: Date?, status: String, live: Bool = false, workpsace: String, scoring: Scoring?, statement: EvaluationStatement?){
+        self.id = id
+        self.currency = currency
+        self.scope = scope
+        self.created = created
+        self.updated = updated
+        self.status = status
+        self.live = live
+        self.workspace = workpsace
+        self.scoring = scoring
+        self.statement = statement
+    }
 }
