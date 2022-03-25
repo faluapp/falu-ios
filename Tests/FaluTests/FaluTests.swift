@@ -1,8 +1,25 @@
 import XCTest
 @testable import Falu
+@testable import Mocker
 
 final class FaluTests: XCTestCase {
-    private let falu = Falu("pk_test_cbw2Bxslzkxf7sUAg6932NYm1ApTX7C0TEMbvCYss")
+    private var mockUrlSession: URLSession!
+    
+    private let baseUrl = "https://api.falu.io"
+    
+    private var falu: Falu!
+    
+    private let encoder: JSONEncoder = JSONEncoder()
+    
+    override func setUpWithError() throws {
+        falu = Falu("pk_test_cbw2Bxslzkxf7sUAg6932NYm1ApTX7C0TEMbvCYss")
+        
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [MockingURLProtocol.self]
+        mockUrlSession = URLSession(configuration: configuration)
+        
+        encoder.dateEncodingStrategy = .iso8601
+    }
     
     func testMpesaPaymentRequestFails(){
         let mpesa = MpesaPaymentRequest(
@@ -14,7 +31,6 @@ final class FaluTests: XCTestCase {
         
         let request = PaymentRequest(amount: 100, currency: "kes", mpesa: mpesa)
         var faluError: Error? = nil
-        let expectation = self.expectation(description: "Payments")
         
         falu.createPayment(request: request) { result in
             if case .failure(let error) = result{
@@ -28,6 +44,16 @@ final class FaluTests: XCTestCase {
     }
     
     func testMpesaPaymentRequestSucceeds(){
+        let expectation = self.expectation(description: "Payments")
+        let url = URL(string: "\(baseUrl)/v1/payments")!
+        
+        let mockPayment = Payment(id: "payment_123", amount: 100000, currency: "kes", status: "succeeded",
+                                  updated: Date(), succeeded: Date(), authorizationId: nil, type: nil, mpesa: nil, faliure: nil,
+                                  reversalId: nil, workspace: "workspace_123")
+        
+        let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [.post: try! encoder.encode(mockPayment)])
+        mock.register()
+        
         let mpesa = MpesaPaymentRequest(
             phone: "+254722000000",
             reference: "254722000000",
@@ -36,8 +62,6 @@ final class FaluTests: XCTestCase {
         
         let request = PaymentRequest(amount: 200.70, currency: "kes", mpesa: mpesa)
         var payment: Payment? = nil
-        let expectation = self.expectation(description: "Payments")
-        
         falu.createPayment(request: request) { result in
             if case .success(let resource) = result{
                 payment = resource

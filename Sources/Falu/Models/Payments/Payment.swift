@@ -75,4 +75,21 @@ public class Payment: Codable{
      */
     public var live: Bool = false
     
+    
+    internal init(id: String, amount: Int, currency: String, status: String, created: Date = Date(), updated: Date, succeeded: Date?, authorizationId: String?, type: String?, mpesa: Mpesa?, faliure: PaymentFailure?, reversalId: String?, workspace: String?, live: Bool = false){
+        self.id = id
+        self.amount = amount
+        self.currency = currency
+        self.status = status
+        self.created = created
+        self.updated = updated
+        self.succeeded = succeeded
+        self.authorizationId = authorizationId
+        self.type = type
+        self.mpesa = mpesa
+        self.failure = faliure
+        self.reversalId = reversalId
+        self.workspace = workspace
+        self.live = live
+    }
 }
