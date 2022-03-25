@@ -73,7 +73,14 @@ final class FaluTests: XCTestCase {
         XCTAssertNotNil(payment)
     }
     
-    func testEvaluationCreationFails(){
+    func testEvaluationCreationSucceeds(){
+        let expectation = self.expectation(description: "Evaluations")
+        let url = URL(string: "\(baseUrl)/v1/evaluations")!
+        
+        let mockedEvaluation = Evaluation(id: "eval_123", currency: "kes", scope: "personal" , created: Date(), updated: Date(), status: "completed", live: false, workpsace: "workspace_123", scoring: nil, statement: nil)
+        
+        let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [.post: try! encoder.encode(mockedEvaluation)])
+        mock.register()
         
         let request = EvaluationRequest(
             currency: "kes",
@@ -85,18 +92,16 @@ final class FaluTests: XCTestCase {
             file: "file_602a8dd0a54847479a874de4"
         )
         
-        var faluError: Error? = nil
-        let expectation = self.expectation(description: "Evaluations")
-        
+        var evaluation: Evaluation? = nil
         falu.createEvaluation(request: request) { result in
-            if case .failure(let error) = result{
-                faluError = error
+            if case .success(let model) = result{
+                evaluation = model
                 expectation.fulfill()
             }
         }
         
         waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertNotNil(faluError)
+        XCTAssertNotNil(evaluation)
     }
     
     func testMoneyPatternConversion(){
