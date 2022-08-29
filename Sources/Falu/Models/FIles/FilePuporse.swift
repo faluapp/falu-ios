@@ -6,7 +6,6 @@ public enum FilePurpose: String, Codable {
     case customerSignature
     case customerSelfie
     case customerTaxDocument
-    case customerEvaluation
     case identityDocument
     
     
@@ -22,8 +21,6 @@ public enum FilePurpose: String, Codable {
             return "customer.selfie"
         case .customerTaxDocument:
             return "customer.tax.document"
-        case .customerEvaluation:
-            return "customer.evaluation"
         case .identityDocument:
             return "identity.document"
         }
@@ -35,7 +32,6 @@ public enum FilePurpose: String, Codable {
         case customerSignature = "customer.signature"
         case customerSelfie = "customer.selfie"
         case customerTaxDocument = "customer.tax.document"
-        case customerEvaluation = "customer.evaluation"
         case identityDocument = "identity.document"
     }
 }

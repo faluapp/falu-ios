@@ -37,17 +37,6 @@ internal class FaluApiClient: TingleApiClient{
     }
     
     @discardableResult
-    func createEvaluation(evaluationRequest: EvaluationRequest,_ completionHandler: @escaping (AnyResourceResponse<Evaluation>?, Error?) -> Void) -> URLSessionTask{
-        let url = URL(string: "\(baseUrl)/v1/evaluations")!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try! encoder.encode(evaluationRequest)
-        return sendRequest(request: &request, completionHandler: completionHandler)
-    }
-    
-    @discardableResult
     func uploadFile(uploadRequest: UploadRequest,_ completionHandler: @escaping (AnyResourceResponse<FaluFile>?, Error?) -> Void) -> URLSessionTask{
         let url = URL(string: "\(baseUrl)/v1/files")!
         
