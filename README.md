@@ -45,36 +45,6 @@ The [public key](https://docs.falu.io/guides/keys) is mandatory. Failing to prov
 
 Once you have finished the setup process, you can proceed to use the features and functionalities offered by the SDK
 
-## Evaluations
-
-Use this feature when you want to know the credit score/worth of a  user.
-This will allow you to know your user's spending habits from their financial statements.
-Vist [Credit scoring customers using the Evaluations API](https://docs.falu.io/guides/evaluations) for more information relating to this.
-
-```swift
-let request = EvaluationRequest(
-    currency: "kes",
-    scope: "personal",
-    provider: "mpesa",
-    name: "JOHN DOE",
-    phone: "+254712345678",
-    password: "pass",
-    file: "file_602a8dd0a54847479a874de5"
-)
-
-falu.createEvaluation(request: request) { result in
-    if case .failure(let error) = result{
-        DispatchQueue.main.async {
-            // show errors on the UI thread
-        }
-    } else {
-        DispatchQueue.main.async {
-            // show on UI thread
-        }
-    }
-}
-```
-
 ## Payments
 
 Create a `Payment` object when initiating payments from a customer.
