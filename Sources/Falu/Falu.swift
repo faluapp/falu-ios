@@ -4,7 +4,6 @@ import TingleApiClient
  *
  * Supports asynchronous methods to access the following Falu APIs:
  *
- * * [Evaluations API] [Create Evaluation] - Create an evaluation
  */
 public class Falu {
     private let apiClient: FaluApiClient
@@ -32,22 +31,6 @@ public class Falu {
      */
     public func createPayment(request: PaymentRequest, _ completion: @escaping  (Result<Payment, Error>) -> Void){
         apiClient.createPayment(paymentRequest: request) { (response, error) in
-            self.responseHandler(withResponse: response, error: error, completion)
-        }
-    }
-    
-    /**
-     * Create an evaluation
-     *
-     * See [Create a payment](https://api.falu.io/v1/evaluations).
-     * `POST /v1/evaluations`
-     *
-     * - Parameter  request [The evaluation request object](https://falu.io)
-     * - Parameter  completion to receive the result or error
-     *
-     */
-    public func createEvaluation(request: EvaluationRequest,  _ completion: @escaping  (Result<Evaluation, Error>) -> Void){
-        apiClient.createEvaluation(evaluationRequest: request){ (response, error) in
             self.responseHandler(withResponse: response, error: error, completion)
         }
     }

@@ -51,37 +51,6 @@ final class FaluTests: XCTestCase {
         XCTAssertNotNil(payment)
     }
     
-    func testEvaluationCreationSucceeds(){
-        let expectation = self.expectation(description: "Evaluations")
-        let url = URL(string: "\(baseUrl)/v1/evaluations")!
-        
-        let mockedEvaluation = Evaluation(id: "eval_123", currency: "kes", scope: "personal" , created: Date(), updated: Date(), status: "completed", live: false, workpsace: "workspace_123", scoring: nil, statement: nil)
-        
-        let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [.post: try! encoder.encode(mockedEvaluation)])
-        mock.register()
-        
-        let request = EvaluationRequest(
-            currency: "kes",
-            scope: "personal",
-            provider: "mpesa",
-            name: "JOHN DOE",
-            phone: "+254712345678",
-            password: "pass",
-            file: "file_602a8dd0a54847479a874de4"
-        )
-        
-        var evaluation: Evaluation? = nil
-        falu.createEvaluation(request: request) { result in
-            if case .success(let model) = result{
-                evaluation = model
-                expectation.fulfill()
-            }
-        }
-        
-        waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertNotNil(evaluation)
-    }
-    
     func testMoneyPatternConversion(){
         let money = Money(
             amount: 1000,
@@ -95,14 +64,14 @@ final class FaluTests: XCTestCase {
         let expectation = self.expectation(description: "Files")
         let url = URL(string: "\(baseUrl)/v1/files")!
 
-        let mockedFile = FaluFile(id: "fl_123", created: Date(), updated: Date(), description: "", purpose: "customer.evaluation", type: "pdf", fileName: "statement.pdf", size: 10, expires: Date())
+        let mockedFile = FaluFile(id: "fl_123", created: Date(), updated: Date(), description: "", purpose: "customer.selfie", type: "png", fileName: "me.png", size: 10, expires: Date())
         let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [.post: try! encoder.encode(mockedFile)])
         mock.register()
         
         let request = UploadRequest(
             file: Data(),
-            fileName: "statement.pdf",
-            purpose: "customer.evaluation",
+            fileName: "me.png",
+            purpose: "customer.selfie",
             description: "Test description",
             expires: Date()
         )
