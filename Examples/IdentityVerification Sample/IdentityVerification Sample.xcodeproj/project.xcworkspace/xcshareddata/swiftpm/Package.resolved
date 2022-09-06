@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "cryptoswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzyzanowskim/CryptoSwift.git",
+      "state" : {
+        "revision" : "12f2389aca4a07e0dd54c86ec23d0721ed88b8db",
+        "version" : "1.4.3"
+      }
+    },
+    {
+      "identity" : "swift-apiclients",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tinglesoftware/swift-apiclients.git",
+      "state" : {
+        "revision" : "2e44cbde8477aef9888c2901cc6e659bb02e28a3",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "5d66f7ba25daf4f94100e7022febf3c75e37a6c7",
+        "version" : "1.4.2"
+      }
+    }
+  ],
+  "version" : 2
+}
