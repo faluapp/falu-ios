@@ -14,11 +14,11 @@ internal class UserAgentMiddleware: TingleApiClientMiddleware{
         request.setValue(agent, forHTTPHeaderField: "User-Agent")
         return request
     }
-    
+
     func process(response: URLResponse?, data: Data?, error: Error?) {
-        
+
     }
-    
+
     private var agent: String {
         #if os(macOS)
         let model = "macOS"
@@ -27,7 +27,7 @@ internal class UserAgentMiddleware: TingleApiClientMiddleware{
         let model = UIDevice.current.model
         let version = "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)"
         #endif
-        
+
         return "falu-iOS/(\(model);\(version));"
     }
 }

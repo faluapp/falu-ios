@@ -9,8 +9,8 @@ internal class ApiVersionMiddleware: TingleApiClientMiddleware{
         request.setValue("2021-09-03", forHTTPHeaderField: "X-Falu-Version")
         return request
     }
-    
+
     func process(response: URLResponse?, data: Data?, error: Error?) {
-        
+
     }
 }
