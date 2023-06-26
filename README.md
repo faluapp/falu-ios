@@ -4,14 +4,14 @@
 
 # Falu iOS SDK
 
-[![Falu](https://github.com/tinglesoftware/falu-ios/actions/workflows/swift.yml/badge.svg)](https://github.com/tinglesoftware/falu-ios/actions/workflows/swift.yml)
+[![Falu](https://github.com/faluapp/falu-ios/actions/workflows/swift.yml/badge.svg)](https://github.com/faluapp/falu-ios/actions/workflows/swift.yml)
 ![Language](https://img.shields.io/badge/language-Swift%205.0-orange.svg)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/tinglesoftware/falu-ios?label=spm)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/faluapp/falu-ios?label=spm)
 
 Falu's iOS SDK simplifies the process of building excellent financial services into iOS applications.
 The SDK exposes APIs that will enable you to make payments and evaluate your client's credit worth.
 
-# Installation  
+# Installation
 
 ## Swift Package Manager
 
@@ -22,7 +22,7 @@ import PackageDescription
 
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/tinglesoftware/falu-ios", from: 1.0.0)
+        .package(url: "https://github.com/faluapp/falu-ios", from: 1.0.0)
     ]
 )
 ```
