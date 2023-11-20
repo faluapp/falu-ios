@@ -1,4 +1,4 @@
-name: Falu
+name: Build and Test
 
 on:
   push:
