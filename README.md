@@ -4,7 +4,7 @@
 
 # Falu iOS SDK
 
-[![Falu](https://github.com/faluapp/falu-ios/actions/workflows/swift.yml/badge.svg)](https://github.com/faluapp/falu-ios/actions/workflows/swift.yml)
+[![GitHub Workflow Status](https://github.com/faluapp/falu-ios/actions/workflows/swift.yml/badge.svg)](https://github.com/faluapp/falu-ios/actions/workflows/swift.yml)
 ![Language](https://img.shields.io/badge/language-Swift%205.0-orange.svg)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/faluapp/falu-ios?label=spm)
 
