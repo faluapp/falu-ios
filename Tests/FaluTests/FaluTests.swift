@@ -26,7 +26,7 @@ final class FaluTests: XCTestCase {
         let url = URL(string: "\(baseUrl)/v1/payments")!
         
         let mockPayment = Payment(id: "payment_123", amount: 100000, currency: "kes", status: "succeeded",
-                                  updated: Date(), succeeded: Date(), authorizationId: nil, type: nil, mpesa: nil, faliure: nil,
+                                  updated: Date(), succeeded: Date(), authorizationId: nil, type: nil, mpesa: nil, failure: nil,
                                   reversalId: nil, workspace: "workspace_123")
         
         let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [.post: try! encoder.encode(mockPayment)])
