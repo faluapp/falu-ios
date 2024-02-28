@@ -15,7 +15,7 @@ public class PaymentFailure: Codable{
     public var timestamp: Date? = nil
     
     /**
-     * Failure message as received from teh provider
+     * Failure message as received from the provider
      */
     public var detail: String? = nil
 }
