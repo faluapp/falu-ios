@@ -23,12 +23,14 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+
     - name: Resolve dependencies
       run: swift package resolve
-      continue-on-error: true
+
     - name: Build
       run: swift build -v
-      continue-on-error: true
+
     - name: Run tests
       run: swift test -v
