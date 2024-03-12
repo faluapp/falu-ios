@@ -33,4 +33,5 @@ included-files:
 
 excluded-files:
   - "*.plist"
+  - "*.pbxproj"
   - ".vscode/settings.json"
