@@ -6,13 +6,13 @@ struct IdentityVerificationOutputs: Codable{
        var idNumber: String?
 
        var firstName: String?
-       
+
        var lastName: String?
 
        var birthday: Date?
 
        var otherNames: [String]?
-    
+
     private enum CodingKeys: String, CodingKey {
         case idNumberType = "id_number_type"
         case idNumber = "id_number"

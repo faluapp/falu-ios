@@ -8,12 +8,12 @@ public class PaymentFailure: Codable{
      * Reason for failure of a payment, transfer or reversal
      */
     public var reason: String? = nil
-    
+
     /**
      * Time at which failure occurred
      */
     public var timestamp: Date? = nil
-    
+
     /**
      * Failure message as received from the provider
      */

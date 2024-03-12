@@ -15,7 +15,7 @@ struct IdentityVerification: Codable {
      var url: String?
 
      var reports: [String]?
-    
+
     private enum CodingKeys: String, CodingKey {
         case id
         case status
