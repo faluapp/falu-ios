@@ -7,8 +7,8 @@ public enum FilePurpose: String, Codable {
     case customerSelfie
     case customerTaxDocument
     case identityDocument
-    
-    
+
+
     internal var purpose: String{
         switch self {
         case .businessIcon:
@@ -25,7 +25,7 @@ public enum FilePurpose: String, Codable {
             return "identity.document"
         }
     }
-    
+
     enum CodingKeys: String, CodingKey  {
         case businessIcon = "business.icon"
         case businessLogo = "business.logo"

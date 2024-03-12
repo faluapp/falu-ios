@@ -25,12 +25,12 @@ struct ContentView: View {
                         }
                     }
                 }
-                
+
                 Section(header: Text("Identity Verification Options")) {
                     Toggle(isOn: $allowDocumentSelfie) {
                         Label("Use document and selfie", systemImage: "camera.circle.fill")
                     }
-                    
+
                     Toggle(isOn: $allowUploads) {
                         Label("Allow uploads", systemImage: "tray.and.arrow.up")
                     }
@@ -51,41 +51,41 @@ struct ContentView: View {
 
         }
     }
-    
+
     private func createVerification() {
         let options = IdentityVerificationOptions(
             allowUploads: allowUploads,
             document: optionsForDocument,
             selfie: optionsForSelfie
         )
-        
+
         let request = IdentityVerificationCreationRequest(type: verificationType, returnUrl: nil, options: options)
-       
+
         loading = true
         apiClient.createIdentityVerification(verification: request) { response, error in
-            
+
             if (error != nil) {
                 // show a network error here
                 DispatchQueue.main.async {
                 }
                 return
             }
-            
+
             guard let response = response else {
                 return
             }
-            
+
             DispatchQueue.main.async {
                 if response.successful && response.resource != nil {
                     let verification = response.resource!
                     guard let url = URL(string: verification.url!   ) else { return }
                     UIApplication.shared.open(url)
                 }
-           
+
             }
         }
     }
-    
+
     private var optionsForSelfie: IdentityVerificationOptionsForSelfie? {
         if(allowDocumentSelfie){
             return IdentityVerificationOptionsForSelfie()
@@ -93,7 +93,7 @@ struct ContentView: View {
             return nil
         }
     }
-    
+
     private var optionsForDocument: IdentityVerificationOptionsForDocument? {
         var allowed: [String] = []
         if (allowDrivingLicense){
@@ -105,7 +105,7 @@ struct ContentView: View {
         }
         return IdentityVerificationOptionsForDocument(allowed:allowed)
     }
-    
+
     private var verificationType: String{
         if(allowDocumentSelfie){
             return "document_and_selfie"
