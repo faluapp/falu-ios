@@ -3,6 +3,7 @@ import TingleApiClient
 
 internal class FaluApiClient: TingleApiClient{
     private let baseUrl = "https://api.falu.io"
+    private let filesBaseUrl = "https://files.falu.io"
 
     internal init(_ apiKey: String){
         super.init(authenticationProvider: FaluAuthHeaderProvider(apiKey))
@@ -38,7 +39,7 @@ internal class FaluApiClient: TingleApiClient{
 
     @discardableResult
     func uploadFile(uploadRequest: UploadRequest,_ completionHandler: @escaping (AnyResourceResponse<FaluFile>?, Error?) -> Void) -> URLSessionTask{
-        let url = URL(string: "\(baseUrl)/v1/files")!
+        let url = URL(string: "\(filesBaseUrl)/v1/files")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

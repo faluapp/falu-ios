@@ -6,6 +6,7 @@ final class FaluTests: XCTestCase {
     private var mockUrlSession: URLSession!
 
     private let baseUrl = "https://api.falu.io"
+    private let filesBaseUrl = "https://files.falu.io"
 
     private var falu: Falu!
 
@@ -62,7 +63,7 @@ final class FaluTests: XCTestCase {
 
     func testFileUploadWorks(){
         let expectation = self.expectation(description: "Files")
-        let url = URL(string: "\(baseUrl)/v1/files")!
+        let url = URL(string: "\(filesBaseUrl)/v1/files")!
 
         let mockedFile = FaluFile(id: "fl_123", created: Date(), updated: Date(), description: "", purpose: "customer.selfie", type: "png", fileName: "me.png", size: 10, expires: Date())
         let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [.post: try! encoder.encode(mockedFile)])
